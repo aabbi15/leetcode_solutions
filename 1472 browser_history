@@ -1,0 +1,53 @@
+class BrowserHistory {
+    string base;
+    vector<string> all;
+    int limit=0;
+    int counter=0;
+public:
+
+    BrowserHistory(string homepage): all(100) {
+        base=homepage;
+        all[0]=base;
+        
+        
+        
+    }
+    
+    void visit(string url) {
+        all[++counter]=url;
+        limit=counter;
+
+
+        
+    }
+    
+    string back(int steps) {
+        counter-=steps;
+        if(counter<=0){
+            counter=0;
+            return base;
+        }
+        else 
+            return all[counter];
+        
+    }
+    
+    string forward(int steps) {
+        counter+=steps;
+        if(counter>limit){
+            counter=limit;
+            return all[counter];
+        }
+
+        else return all[counter];
+        
+    }
+};
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
