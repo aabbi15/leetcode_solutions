@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        unordered_map<int,int> count;
+        
+        int maxi=0;
+        for(int n:nums){
+            count[n]++;
+            maxi=max(maxi,count[n]);
+        }
+        vector<vector<int>> ans(maxi);
+
+       // cout<<maxi<<endl;
+
+        auto it=count.begin();
+        for(int i=0;i<maxi;i++){
+            while( it!=count.end()){
+                if(count[it->first]!=0){
+
+                    ans[i].push_back(it->first);
+                    count[it->first]--;
+                   // cout<<it->first;
+                    
+                }
+                it++;
+
+            }
+            it=count.begin();
+           // cout<<endl;
+        }
+        return ans;
+
+        
+    }
+};
