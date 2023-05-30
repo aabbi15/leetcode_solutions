@@ -1,39 +1,17 @@
 class Solution {
-    unordered_map<int,int> m;
-    
 public:
-    
-    int fxn (vector<int> cost,int n){
-        if (n==0) return cost[0];
-        if(n<0) return 0;
-       // if(k==1) return cost[1];
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n = cost.size();
+        if (n <= 1) return 0;  // Base cases when n <= 1
         
-        if(m.find(n)!=m.end()){
-            return m[n];
+        vector<int> dp(n, 0);
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        
+        for (int i = 2; i < n; i++) {
+            dp[i] = cost[i] + min(dp[i-1], dp[i-2]);
         }
         
-        int take_next, leave_next;
-        
-        
-        
-        take_next=cost[n]+fxn(cost,n-1);
-        leave_next=cost[n]+fxn(cost,n-2);
-        
-        m[n]=min(take_next,leave_next);
-        
-        return m[n];
-        
-        
-        
-        
-    }
-    int minCostClimbingStairs(vector<int>& cost) {
-        int n=cost.size();
-        cost.push_back(0);
-        return fxn(cost,n);
-            
-            
-        
-        
+        return min(dp[n-1], dp[n-2]);
     }
 };
