@@ -8,7 +8,7 @@ public:
         if(n<0) return 0;
        // if(k==1) return cost[1];
         
-        if(m[n]){
+        if(m.find(n)!=m.end()){
             return m[n];
         }
         
